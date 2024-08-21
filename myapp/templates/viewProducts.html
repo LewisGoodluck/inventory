@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/view.css'%}">
+    <script src="{% static "javascript/delete.js" %}" defer></script>
+</head>
+<body>
+    {% include "navigation.html" %}
+
+    <div style="color:green;">
+        {% if messages %}
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div style="font-size:larger; padding:10px">There are {{count}} products registered in this system</div>
+
+    <table cellspacing="5" cellpadding="5">
+        <tr>
+            <th>product</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th style="background-color: #cf3535; text-align:center; color: #FFFFFF;" colspan="2">ACTIONS</th>
+        </tr>
+        {% for products in products %}
+        <tr>
+            <td>{{products.name}}</td>
+            <td>{{products.price}}</td>
+            <td>{{products.quantity}}</td>
+            <td><a href="{% url 'updateProducts' products.id %}" class="update">update</a></td>
+            <td><a href="{% url 'deleteProducts' products.id %}" class="delete" onclick="return confirmDelete();">delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

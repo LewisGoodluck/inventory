@@ -1,0 +1,71 @@
+/* home.css */
+
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Container Styling */
+div {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+/* Paragraph Styling */
+p {
+    text-align: center;
+    color: #555;
+    font-size: 1.2em;
+}
+
+/* Navigation Styling */
+nav {
+    background-color: #2c3e50;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    font-size: 1.1em;
+}
+
+nav a:hover {
+    background-color: #34495e;
+}
+
+/* Navigation List Styling */
+ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+li {
+    display: inline;
+    margin: 0 15px;
+}
+
+/* Links Styling */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

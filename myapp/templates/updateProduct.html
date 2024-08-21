@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+</head>
+<body>
+    {% include "navigation.html" %}
+
+    <div class="container">
+        <h1>Update Product</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in product %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>
