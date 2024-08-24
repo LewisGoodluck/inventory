@@ -38,13 +38,8 @@ def register_products(request):
     if request.method == "POST":
         form = ProductsForm(request.POST)
         if form.is_valid():
-            # check if product exist
-            productName = form.cleaned_data['name']
-            if Products.objects.filter(name=productName).exists():
-                messages.error(request,"this product already exists")
-                return redirect("registerProducts")
             form.save()
-            messages.success(request,"product registered successfully")
+            messages.success(request,"product sold success")
             return redirect("viewProducts")
     else:
         form = ProductsForm()
@@ -61,16 +56,35 @@ def view_products(request):
 
 @login_required
 @never_cache
-def update_products(request,id):
-    product = get_object_or_404(Products,id=id)    
+def update_products(request, id):
+    product = get_object_or_404(Products, id=id)
     if request.method == "POST":
-        form = ProductsForm(request.POST,instance=product)
+        form = ProductsForm(request.POST, instance=product)
         if form.is_valid():
-            form.save()
+            # Save the form, updating the product's details
+            newupdate = form.save()
+
+            # Recalculate balance for the updated product
+            calculateAmount = newupdate.quantity * newupdate.rate
+            lastdata = Products.objects.filter(id__lt=newupdate.id).order_by('-id').first()
+            if lastdata:
+                newupdate.balance = lastdata.balance + calculateAmount - newupdate.expenses
+            else:
+                newupdate.balance = calculateAmount - newupdate.expenses
+            newupdate.save()
+            # Recalculate balances for all subsequent products
+            products = Products.objects.filter(id__gt=newupdate.id).order_by("id")
+            previous_balance = newupdate.balance
+            for prod in products:
+                prod.balance = previous_balance + prod.quantity * prod.rate - prod.expenses
+                prod.save()
+                previous_balance = prod.balance
+
             return redirect("viewProducts")
     else:
         form = ProductsForm(instance=product)
-    return render(request,"updateProduct.html",{"product":form})
+    return render(request, "updateProduct.html", {"product": form})
+
 
 @login_required
 @never_cache

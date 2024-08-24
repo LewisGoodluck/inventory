@@ -42,17 +42,20 @@ h1 {
 /* Form Group Styling */
 .form-group {
     margin-bottom: 15px;
+    /* font-size: larger; */
 }
 
 .form-group label {
     display: block;
     margin-bottom: 5px;
     color: #555;
+    font-size: larger;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
+    font-size: larger;
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

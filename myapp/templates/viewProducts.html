@@ -18,24 +18,37 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div style="font-size:larger; padding:10px">There are {{count}} products registered in this system</div>
+    <div style="font-size:larger; padding:10px">There are {{count}} products Sold in this system</div>
 
     <table cellspacing="5" cellpadding="5">
         <tr>
-            <th>product</th>
-            <th>price</th>
+            <th>itemDetail</th>
             <th>quantity</th>
+            <th>unit</th>
+            <th>rate</th>
+            <th>amount</th>
+            <th>expenses</th>
+            <th>balance</th>
+
             <th style="background-color: #cf3535; text-align:center; color: #FFFFFF;" colspan="2">ACTIONS</th>
         </tr>
         {% for products in products %}
         <tr>
-            <td>{{products.name}}</td>
-            <td>{{products.price}}</td>
+            <td>{{products.item_details}}</td>
             <td>{{products.quantity}}</td>
+            <td>{{products.unit}}</td>
+            <td>{{products.rate}}</td>
+            <td>{{products.amount}}</td>
+            <td>{{products.expenses}}</td>
+            <td>{{products.balance}}</td>
             <td><a href="{% url 'updateProducts' products.id %}" class="update">update</a></td>
             <td><a href="{% url 'deleteProducts' products.id %}" class="delete" onclick="return confirmDelete();">delete</a></td>
         </tr>
         {% endfor %}
     </table>
+    <div>
+        <button type="submit">backUp data</button>
+        <button type="submit">send To Excel</button>
+    </div>
 </body>
 </html>
